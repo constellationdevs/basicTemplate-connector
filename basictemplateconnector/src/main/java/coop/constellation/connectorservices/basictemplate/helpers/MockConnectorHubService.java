@@ -79,16 +79,20 @@ public class MockConnectorHubService implements ConnectorHubService {
     }
 
     @Override
-    public CompletableFuture<ConnectorState> executeConnector(ConnectorMessage connectorMessage, ConnectorRequestData connectorRequestData) {
+    public CompletableFuture<ConnectorState> executeConnector(ConnectorMessage connectorMessage,
+            ConnectorRequestData connectorRequestData) {
         Function<ConnectorRequestParams, ConnectorState> asyncConnectorRequest = this.callConnectorAsync();
         Function<ConnectorState, ConnectorState> pollAsyncConnectorRequest = this.waitForConnectorResponse();
-        return this.initAsyncConnectorRequest(connectorMessage, connectorRequestData).thenApply(asyncConnectorRequest).thenApplyAsync(pollAsyncConnectorRequest);
+        return this.initAsyncConnectorRequest(connectorMessage, connectorRequestData).thenApply(asyncConnectorRequest)
+                .thenApplyAsync(pollAsyncConnectorRequest);
     }
 
     @Override
-    public CompletableFuture<ConnectorRequestParams> initAsyncConnectorRequest(ConnectorMessage connectorMessage, ConnectorRequestData connectorRequestData) {
+    public CompletableFuture<ConnectorRequestParams> initAsyncConnectorRequest(ConnectorMessage connectorMessage,
+            ConnectorRequestData connectorRequestData) {
         return CompletableFuture.supplyAsync(() -> {
-            ConnectorRequestParams connectorRequestParams = new ConnectorRequestParams(connectorMessage, connectorRequestData);
+            ConnectorRequestParams connectorRequestParams = new ConnectorRequestParams(connectorMessage,
+                    connectorRequestData);
             TokenData tokenData = new TokenData("mock token");
             connectorRequestParams.setWriterToken(tokenData);
             return connectorRequestParams;
@@ -97,41 +101,53 @@ public class MockConnectorHubService implements ConnectorHubService {
 
     @Override
     public ConnectorState prepareNextConnector(ConnectorRequestData nextConnector, ConnectorState connectorState) {
-        ConnectorRequestParams connectorRequestParams = new ConnectorRequestParams(connectorState.getConnectorRequestParams().getConnectorMessage(), nextConnector);
+        ConnectorRequestParams connectorRequestParams = new ConnectorRequestParams(
+                connectorState.getConnectorRequestParams().getConnectorMessage(), nextConnector);
         connectorRequestParams.setWriterToken(connectorState.getConnectorRequestParams().getWriterToken());
         connectorState.setConnectorRequestParams(connectorRequestParams);
         return connectorState;
     }
 
     @Override
-    public ConnectorState createConnectorState(ConnectorRequestData connectorRequestData, ConnectorMessage connectorMessage) {
-        ConnectorRequestParams connectorRequestParams = new ConnectorRequestParams(connectorMessage, connectorRequestData);
+    public ConnectorState createConnectorState(ConnectorRequestData connectorRequestData,
+            ConnectorMessage connectorMessage) {
+        ConnectorRequestParams connectorRequestParams = new ConnectorRequestParams(connectorMessage,
+                connectorRequestData);
         TokenData token = new TokenData("mock token");
         connectorRequestParams.setWriterToken(token);
         return new ConnectorState(connectorRequestParams);
     }
 
     @Override
-    public ConnectorMessage handleAsyncFlowError(Throwable exception, ConnectorMessage connectorMessage, String additionalGeneralErrorMessage) {
+    public ConnectorMessage handleAsyncFlowError(Throwable exception, ConnectorMessage connectorMessage,
+            String additionalGeneralErrorMessage) {
         if (exception.getCause() instanceof ValidationException) {
             String var10000 = exception.getCause().getMessage();
-            String detailedError = "[" + var10000 + "] Detailed Description [" + ((ValidationException)exception.getCause()).getDescription() + "]";
-            logger.error(connectorMessage, "Validation Exception in Workflow connector " + additionalGeneralErrorMessage + " : " + detailedError);
+            String detailedError = "[" + var10000 + "] Detailed Description ["
+                    + ((ValidationException) exception.getCause()).getDescription() + "]";
+            logger.error(connectorMessage, "Validation Exception in Workflow connector " + additionalGeneralErrorMessage
+                    + " : " + detailedError);
             connectorMessage.setResponse("Validation Error: " + detailedError);
-            connectorMessage.getResponseStatus().setStatus(((ValidationException)exception.getCause()).getMessage());
-            connectorMessage.getResponseStatus().setStatusCode(((ValidationException)exception.getCause()).getStatus());
-            connectorMessage.getResponseStatus().setStatusDescription(((ValidationException)exception.getCause()).getDescription());
+            connectorMessage.getResponseStatus().setStatus(((ValidationException) exception.getCause()).getMessage());
+            connectorMessage.getResponseStatus()
+                    .setStatusCode(((ValidationException) exception.getCause()).getStatus());
+            connectorMessage.getResponseStatus()
+                    .setStatusDescription(((ValidationException) exception.getCause()).getDescription());
 
             try {
                 this.complete(connectorMessage);
                 return connectorMessage;
             } catch (ConnectorHubServiceException var6) {
-                logger.error(connectorMessage, "Serious unknown error during Workflow connector (" + additionalGeneralErrorMessage + ") : " + detailedError);
-                throw new RuntimeException("Serious unknown error during Workflow connector (" + additionalGeneralErrorMessage + ") : " + exception);
+                logger.error(connectorMessage, "Serious unknown error during Workflow connector ("
+                        + additionalGeneralErrorMessage + ") : " + detailedError);
+                throw new RuntimeException("Serious unknown error during Workflow connector ("
+                        + additionalGeneralErrorMessage + ") : " + exception);
             }
         } else {
-            logger.error(connectorMessage, "Serious unknown error during Workflow connector (" + additionalGeneralErrorMessage + ") : " + exception);
-            throw new RuntimeException("Serious unknown error during Workflow connector (" + additionalGeneralErrorMessage + ") : " + exception);
+            logger.error(connectorMessage, "Serious unknown error during Workflow connector ("
+                    + additionalGeneralErrorMessage + ") : " + exception);
+            throw new RuntimeException("Serious unknown error during Workflow connector ("
+                    + additionalGeneralErrorMessage + ") : " + exception);
         }
     }
 }

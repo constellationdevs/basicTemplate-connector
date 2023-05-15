@@ -1,6 +1,5 @@
 package coop.constellation.connectorservices.basictemplate;
 
-
 import com.xtensifi.connectorservices.common.logging.ConnectorLogging;
 import com.xtensifi.connectorservices.common.workflow.*;
 import com.xtensifi.dspco.ConnectorMessage;
@@ -15,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-
 
 import coop.constellation.connectorservices.basictemplate.controller.BaseParamsSupplier;
 import coop.constellation.connectorservices.basictemplate.helpers.EnhancedConnectorLogging;

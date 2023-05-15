@@ -5,7 +5,6 @@ import com.xtensifi.cufx.CustomData;
 import com.xtensifi.cufx.ValuePair;
 import com.xtensifi.dspco.ConnectorMessage;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
@@ -64,7 +63,7 @@ public class EnhancedConnectorLogging extends ConnectorLogging {
         } catch (Exception e) {
             eclEnabled = false;
         }
-        
+
         return eclEnabled;
 
     }
