@@ -26,7 +26,6 @@ public class BusinessLogicMethodHandler extends HandlerBase {
     @Override
     public String generateResponse(Map<String, String> parms, ConnectorState connectorState)
             throws IOException, ParseException {
-        // TODO Auto-generated method stub
         return null;
     }
 

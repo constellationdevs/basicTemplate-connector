@@ -101,14 +101,4 @@ public class BeansConfig {
         return new ConnectorConfig();
     }
 
-    /**
-     * Configure a blind index builder for creating member number indices to speed
-     * up
-     * querying for member numbers (since member numbers are encrypted in storage).
-     */
-    @Bean
-    BlindIndexBuilder blindIndexBuilder() {
-        return new BlindIndexBuilder.DefaultBlindIndexBuilder();
-    }
-
 }
