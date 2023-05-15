@@ -6,12 +6,17 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import com.xtensifi.connectorservices.common.workflow.ConnectorState;
 import com.xtensifi.dspco.ConnectorMessage;
 import com.xtensifi.dspco.UserData;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class GetLocalTextFileHandler extends HandlerBase {
 
     @Override

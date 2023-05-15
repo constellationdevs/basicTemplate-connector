@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.xtensifi.connectorservices.common.workflow.ConnectorState;
 import com.xtensifi.dspco.ConnectorMessage;
 import com.xtensifi.dspco.UserData;
 
 import coop.constellation.connectorservices.basictemplate.service.BasicTemplateImp;
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
 public class ExternalCallMethodHandler extends HandlerBase {
 
     private BasicTemplateImp BasicTemplateSvc;
