@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.HashMap;
 import com.xtensifi.connectorservices.common.accesslayer.HttpRequest;
 import com.xtensifi.dspco.ConnectorMessage;
+
+import coop.constellation.connectorservices.basictemplate.handlers.BasicTemplateHandler;
+
 import com.xtensifi.connectorservices.common.logging.ConnectorLogging;
 
 @Singleton

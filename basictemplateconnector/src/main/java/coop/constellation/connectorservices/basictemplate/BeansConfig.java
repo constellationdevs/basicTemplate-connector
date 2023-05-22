@@ -59,17 +59,6 @@ public class BeansConfig {
         return (status, message) -> ResponseEntity.status(OK).build();
     }
 
-    /**
-     * This builder waits for the completable future before returning its response.
-     * This is intended to be used in a local profile alongside the
-     * MockConnectorHubService.
-     */
-    @Bean
-    @Profile("local")
-    ConnectorResponseEntityBuilder localResponseEntityBuilder() {
-        return new LocalConnectorResponseEntityBuilder();
-    }
-
     @Bean
     @Profile("!local")
     ConnectorLogging connectorLogging() {
