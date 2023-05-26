@@ -29,3 +29,5 @@
 
     ```
 
+## Spring profiles
+We annotate beans with "local" for mapping to a specific profile used in local environments for connector logging. This is configured in the launch.json file. 
