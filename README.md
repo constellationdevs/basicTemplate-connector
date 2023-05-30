@@ -30,4 +30,4 @@
     ```
 
 ## Spring profiles
-We annotate beans with "local" for mapping to a specific profile used in local environments for connector logging. This is configured in the launch.json file. 
+Spring Profiles are used to activate different implementations of ConnectorLogging Beans. If you choose to use VS Code as your IDE, a lauch.json file is included that will make use of the "local" profile to print logs to the IDE output console.

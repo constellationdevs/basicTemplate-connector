@@ -20,13 +20,6 @@ public class BeansConfig {
 
     @Bean
     @Profile("!local")
-    ConnectorHubService connectorHubService() {
-        return new ConnectorHubServiceImpl();
-    }
- 
-
-    @Bean
-    @Profile("!local")
     ConnectorLogging connectorLogging() {
         return new EnhancedConnectorLogging();
     }
