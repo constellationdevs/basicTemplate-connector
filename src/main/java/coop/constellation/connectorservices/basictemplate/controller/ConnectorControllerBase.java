@@ -6,20 +6,14 @@ import com.xtensifi.connectorservices.common.logging.ConnectorLogging;
 import com.xtensifi.cufx.CustomData;
 import com.xtensifi.cufx.ValuePair;
 import com.xtensifi.dspco.*;
-import com.xtensifi.connectorservices.common.workflow.ConnectorState;
-import com.xtensifi.connectorservices.common.workflow.ConnectorResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Component;
 
 import coop.constellation.connectorservices.basictemplate.handlers.HandlerLogic;
 
-import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -52,33 +46,6 @@ public class ConnectorControllerBase {
     public void setBaseParamsSupplier(BaseParamsSupplier supplier) {
         this.baseParamsSupplier = supplier;
     }
-
-    public Function<ConnectorState, ConnectorState> handleResponseEntity(HandlerLogic handler) {
-
-        return connectorState -> {
-            List<ConnectorResponse> connectorResponseList = connectorState.getConnectorResponseList().getResponses();
-
-            clog.info(connectorState.getConnectorMessage(), "Response list size: " + connectorResponseList.size());
-
-            final Map<String, String> allParams = getAllParams(connectorState.getConnectorMessage(),
-                    baseParamsSupplier.get());
-
-            String finalJSONResponse = null;
-            try {
-                finalJSONResponse = handler.generateResponse(allParams, connectorState);
-
-            } catch (IOException e) {
-                clog.error(connectorState.getConnectorMessage(), e.getMessage());
-            } catch (ParseException e) {
-                clog.error(connectorState.getConnectorMessage(), e.getMessage());
-            }
-
-            connectorState.setResponse(finalJSONResponse);
-
-            return connectorState;
-        };
-    }
-
     /**
      * Boilerplate method for handling the connector message
      * 
@@ -165,14 +132,4 @@ public class ConnectorControllerBase {
         }
         return allParams;
     }
-
-    // public JdbcTemplate createJdbc(ConnectorMessage connectorMessage) {
-
-    // return createJdbcTemplate(getAllParams(connectorMessage));
-    // }
-
-    // protected JdbcTemplate createJdbcTemplate(final Map<String, String> parms) {
-    // return new JdbcTemplate(MultiLazyDataSourcePool.getDataSource(parms, () ->
-    // parms.get("org")));
-    // }
 }
