@@ -143,6 +143,7 @@ basic_connector_sample/
 ├─ target/
 
 ## Portal Upload Structure
+- The portal is only expecting the following required files at the time of upload [externalconnector.zip] [pom.xml] [Dockerfile]
 
 externalconnector.zip/ - Contains all the java code to build a project in a springboot self-contained application.
 pom.xml/ - Includes all of the dependencies required to build the Java project.
