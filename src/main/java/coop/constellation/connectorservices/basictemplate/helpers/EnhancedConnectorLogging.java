@@ -8,9 +8,11 @@ import com.xtensifi.dspco.ConnectorMessage;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
+
 /**
  * A simple wrapper around ConnectorLogging that looks for global params and
- * application.properties settings: EnableConnectorLogging = true in the global params will
+ * application.properties settings: EnableConnectorLogging = true in the global
+ * params will
  * turn logging on without needing to redeploy connector connector.local=TRUE
  * will send messages to slf4j otherwise they will go to the original
  * ConnectorLogging
@@ -20,8 +22,10 @@ import java.util.List;
 public class EnhancedConnectorLogging extends ConnectorLogging {
     /**
      * This method enables the connector logging to be turned on or off with a
-     * global connector param, 'EnableConnectorLogging' EnableConnectorLogging = true --> logging is turned
-     * on. EnableConnectorLogging = false (or any other value) --> logging is turned off. If the
+     * global connector param, 'EnableConnectorLogging' EnableConnectorLogging =
+     * true --> logging is turned
+     * on. EnableConnectorLogging = false (or any other value) --> logging is turned
+     * off. If the
      * value pair is missing, logging is turned on by default
      * 
      * @param connectorMessage
@@ -53,9 +57,9 @@ public class EnhancedConnectorLogging extends ConnectorLogging {
     @Override
     public void debug(ConnectorMessage connectorMessage, String message) {
         if (isEclEnabled(connectorMessage)) {
-                super.debug(connectorMessage, message);
-            } else {
-                log.debug(message);
+            super.debug(connectorMessage, message);
+        } else {
+            log.debug(message);
         }
     }
 
@@ -99,9 +103,9 @@ public class EnhancedConnectorLogging extends ConnectorLogging {
     @Override
     public void info(ConnectorMessage connectorMessage, String message) {
         if (isEclEnabled(connectorMessage)) {
-                super.info(connectorMessage, message);
-            } else {
-                log.info(message);
+            super.info(connectorMessage, message);
+        } else {
+            log.info(message);
         }
     }
 
@@ -113,9 +117,9 @@ public class EnhancedConnectorLogging extends ConnectorLogging {
     @Override
     public void trace(ConnectorMessage connectorMessage, String message) {
         if (isEclEnabled(connectorMessage)) {
-                super.trace(connectorMessage, message);
-            } else {
-                log.trace(message);
+            super.trace(connectorMessage, message);
+        } else {
+            log.trace(message);
         }
     }
 
@@ -127,9 +131,9 @@ public class EnhancedConnectorLogging extends ConnectorLogging {
     @Override
     public void warn(ConnectorMessage connectorMessage, String message) {
         if (isEclEnabled(connectorMessage)) {
-                super.warn(connectorMessage, message);
-            } else {
-                log.warn(message);
-            }
+            super.warn(connectorMessage, message);
+        } else {
+            log.warn(message);
+        }
     }
 }
