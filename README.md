@@ -1,5 +1,7 @@
 # Getting Started: Basic Connector Project
+
 This sample is meant to provide a starting point for making your first connector. It contains 3 sample methods:
+
 1. A standard business logic method
 2. A method that makes a call to an external URL
 3. A method that reads from a local file
@@ -124,9 +126,11 @@ This sample is meant to provide a starting point for making your first connector
      }
   }
   ```
-## How to deploy 
+
+## How to deploy
 
 ## Local Connector Structure
+
 basic_connector_sample/
 ├─ Dockerfile/
 ├─ lib/
@@ -138,14 +142,17 @@ basic_connector_sample/
 - Make sure the name and version of your connector is reflected accurately in all of the connector assets
 
 - The lib/ and src/ directory should be packaged(compressed) together at the same level, in a [externalconnector.zip] for upload
-  - Any other connector assets *excluding* those listed in the Local Connector Structure should also be included in this zipped folder.
+
+  - Any other connector assets _excluding_ those listed in the Local Connector Structure should also be included in this zipped folder.
 
 - The portal is only expecting the following required files at the time of upload [externalconnector.zip] [pom.xml] [Dockerfile]
 
 ## Portal Upload Structure
+
 externalconnector.zip/
 pom.xml/
 Dockerfile/
 
 ## Spring profiles
+
 Spring Profiles are used to activate different implementations of ConnectorLogging Beans. If you choose to use VS Code as your IDE, a lauch.json file is included that will make use of the "local" profile to print logs to the IDE output console.
