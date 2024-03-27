@@ -10,8 +10,8 @@
 	</parent>
 
 	<groupId>coop.constellation.connectorservices</groupId>
-	<artifactId>basictemplate</artifactId>
-	<version>1.0</version>
+    <artifactId>${connector.name}</artifactId>
+    <version>${connector.version}</version>
 	<name>basictemplate</name>
 	<description>basictemplate connector</description>
 
