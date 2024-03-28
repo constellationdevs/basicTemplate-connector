@@ -10,8 +10,8 @@
 	</parent>
 
 	<groupId>coop.constellation.connectorservices</groupId>
-    <artifactId>${connector.name}</artifactId>
-    <version>${connector.version}</version>
+	<artifactId>${connector.name}</artifactId>
+	<version>${connector.version}</version>
 	<name>basictemplate</name>
 	<description>basictemplate connector</description>
 
@@ -48,9 +48,9 @@
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
 				<exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
 				<!-- exclude tomcat jdbc connection pool, use HikariCP -->
 				<exclusion>
 					<groupId>org.apache.tomcat</groupId>
